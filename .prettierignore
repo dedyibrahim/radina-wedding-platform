@@ -1,0 +1,7 @@
+node_modules
+frontend/dist
+backend
+legacy-invitation
+test-results
+package-lock.json
+scripts/vendor

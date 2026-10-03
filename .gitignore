@@ -1,0 +1,16 @@
+node_modules/
+.local-tools/
+dist/
+test-results/
+playwright-report/
+*.local
+scripts/vendor/
+backend/vendor/
+backend/.env
+backend/.env.testing
+backend/storage/local-mysql/
+backend/storage/app/public/*
+!backend/storage/app/public/.gitignore
+backend/storage/framework/
+backend/storage/logs/
+frontend/dist/

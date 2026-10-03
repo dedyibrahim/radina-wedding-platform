@@ -1,0 +1,1 @@
+﻿Historical one-time construction scripts for the Radina experience upgrade. Do not run them against the current project. Runtime components and migrations are the maintained sources; npm and Artisan do not execute these scripts.

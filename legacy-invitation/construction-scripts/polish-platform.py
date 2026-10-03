@@ -1,0 +1,9 @@
+from pathlib import Path
+root=Path(__file__).resolve().parents[1]
+front=root/'frontend'/'src'
+p=front/'pages'/'public'/'Wedding.vue';s=p.read_text(encoding='utf-8');s=s.replace('`/templates/${route.params.slug}`','`/templates/${wedding.template.slug}`').replace('`/order/${route.params.slug}`','`/order/${wedding.template.slug}`');p.write_text(s,encoding='utf-8')
+p=front/'templates'/'RomanticFloral'/'components'/'WeddingGift.vue';s=p.read_text(encoding='utf-8');s=s.replace('<div class="bank-list">','<p v-if="wedding.isDemo" class="sample-note">Rekening dan alamat demo — bukan untuk transaksi.</p><div class="bank-list">');p.write_text(s,encoding='utf-8')
+p=front/'pages'/'admin'/'Login.vue';s=p.read_text(encoding='utf-8');s=s.replace("import { useAuthStore } from '../../stores/auth'","import { useAuthStore } from '../../stores/auth'\nimport { usePlatformStore } from '../../stores/platform'\nconst platform=usePlatformStore()\nplatform.load()")
+s=s.replace('EVERAFTER STUDIO','{{ platform.settings.company_name||\'Wedding\' }} STUDIO').replace('<Heart :size="20"/>Everafter','<img v-if="platform.settings.logo" :src="platform.settings.logo" alt="Logo"/><Heart v-else :size="20"/>{{ platform.settings.company_name||\'Wedding Studio\' }}');p.write_text(s,encoding='utf-8')
+p=root/'backend'/'app'/'Http'/'Controllers'/'PublicController.php';s=p.read_text(encoding='utf-8');s=s.replace("$w=$this->published($slug);abort_unless($w->settings?->enable_rsvp", "$w=$this->published($slug);abort_if($w->is_demo,403,'Demo tidak menerima RSVP.');abort_unless($w->settings?->enable_rsvp").replace("$w=$this->published($slug);abort_unless($w->settings?->enable_wishes,403);$wish=", "$w=$this->published($slug);abort_if($w->is_demo,403,'Demo tidak menerima ucapan.');abort_unless($w->settings?->enable_wishes,403);$wish=");p.write_text(s,encoding='utf-8')
+print('Preview navigation, demo labels, and configurable login branding updated.')
